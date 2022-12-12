@@ -16,6 +16,9 @@ jobs:
             ~/.cache/bazel
           key: ${{ runner.os }}-${{ env.cache-name }}
 
+      - name: Checkout Repo 
+        uses: actions/checkout@v2
+
       - name: Install Bazelisk
         run: |
           curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.13.2/bazelisk-linux-amd64"
