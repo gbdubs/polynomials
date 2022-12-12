@@ -1,6 +1,10 @@
 package polynomials
 
-import "github.com/gbdubs/polynomials/bigcomplex"
+import (
+	"math/big"
+
+	"github.com/gbdubs/polynomials/bigcomplex"
+)
 
 func SecondOrder(a, b, c *bigcomplex.BigComplex) []*bigcomplex.BigComplex {
 	if a.IsZero() {
@@ -29,11 +33,21 @@ func SecondOrderComplex128(a, b, c complex128) []complex128 {
 			FromComplex128UseWithCaution(c)))
 }
 
-func SecondOrderReal(a, b, c float64) []float64 {
+func SecondOrderReal(a, b, c *big.Float) []*big.Float {
 	return RealComponents(
 		FilterToReals(
 			SecondOrder(
-				FromFloat64UseWithCaution(a),
-				FromFloat64UseWithCaution(b),
-				FromFloat64UseWithCaution(c))))
+				&bigcomplex.BigComplex{Real: newFloat().Set(a), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(b), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(c), Imag: newFloat()})))
+}
+
+func SecondOrderRealFloat64(a, b, c float64) []float64 {
+	return Float64s(
+		RealComponents(
+			FilterToReals(
+				SecondOrder(
+					FromFloat64UseWithCaution(a),
+					FromFloat64UseWithCaution(b),
+					FromFloat64UseWithCaution(c)))))
 }

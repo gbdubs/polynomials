@@ -34,7 +34,7 @@ func randomBigComplex() *bigcomplex.BigComplex {
 }
 
 func TestFirstOrder(t *testing.T) {
-	nTestsToRun := 0
+	nTestsToRun := 100
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()
@@ -51,7 +51,7 @@ func TestFirstOrder(t *testing.T) {
 }
 
 func TestSecondOrder(t *testing.T) {
-	nTestsToRun := 0
+	nTestsToRun := 100
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()
@@ -69,7 +69,7 @@ func TestSecondOrder(t *testing.T) {
 }
 
 func TestThirdOrder(t *testing.T) {
-	nTestsToRun := 0
+	nTestsToRun := 100
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()
@@ -107,8 +107,7 @@ func TestThirdOrder(t *testing.T) {
 }
 
 func TestFourthOrder(t *testing.T) {
-	nTestsToRun := 500
-	precision.Set(5000)
+	nTestsToRun := 100
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()

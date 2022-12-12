@@ -30,11 +30,19 @@ func ToComplex128s(bcs []*bigcomplex.BigComplex) []complex128 {
 	return result
 }
 
-func RealComponents(bcs []*bigcomplex.BigComplex) []float64 {
+func RealComponents(bcs []*bigcomplex.BigComplex) []*big.Float {
+	result := make([]*big.Float, len(bcs))
+	for i, bc := range bcs {
+		result[i] = bc.Real
+	}
+	return result
+}
+
+func Float64s(bcs []*big.Float) []float64 {
 	result := make([]float64, len(bcs))
 	for i, bc := range bcs {
-		real, _ := bc.Real.Float64()
-		result[i] = real
+		f, _ := bc.Float64()
+		result[i] = f
 	}
 	return result
 }

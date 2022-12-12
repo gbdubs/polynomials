@@ -1,6 +1,8 @@
 package polynomials
 
 import (
+	"math/big"
+
 	"github.com/gbdubs/polynomials/bigcomplex"
 )
 
@@ -91,13 +93,25 @@ func FourthOrderComplex128(a, b, c, d, e complex128) []complex128 {
 			FromComplex128UseWithCaution(e)))
 }
 
-func FourthOrderReal(a, b, c, d, e float64) []float64 {
+func FourthOrderReal(a, b, c, d, e *big.Float) []*big.Float {
 	return RealComponents(
 		FilterToReals(
 			FourthOrder(
-				FromFloat64UseWithCaution(a),
-				FromFloat64UseWithCaution(b),
-				FromFloat64UseWithCaution(c),
-				FromFloat64UseWithCaution(d),
-				FromFloat64UseWithCaution(e))))
+				&bigcomplex.BigComplex{Real: newFloat().Set(a), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(b), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(c), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(d), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(e), Imag: newFloat()})))
+}
+
+func FourthOrderRealFloat64(a, b, c, d, e float64) []float64 {
+	return Float64s(
+		RealComponents(
+			FilterToReals(
+				FourthOrder(
+					FromFloat64UseWithCaution(a),
+					FromFloat64UseWithCaution(b),
+					FromFloat64UseWithCaution(c),
+					FromFloat64UseWithCaution(d),
+					FromFloat64UseWithCaution(e)))))
 }

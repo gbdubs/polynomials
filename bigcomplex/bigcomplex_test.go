@@ -34,7 +34,7 @@ func randomBigComplex() *BigComplex {
 }
 
 func TestSqrt(t *testing.T) {
-	nTestsToRun := 10000
+	nTestsToRun := 1000
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		n := randomBigComplex()
@@ -50,7 +50,7 @@ func TestSqrt(t *testing.T) {
 }
 
 func TestAddSub(t *testing.T) {
-	nTestsToRun := 10000
+	nTestsToRun := 1000
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()
@@ -61,7 +61,7 @@ func TestAddSub(t *testing.T) {
 }
 
 func TestDivMul(t *testing.T) {
-	nTestsToRun := 10000
+	nTestsToRun := 1000
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()
@@ -72,7 +72,7 @@ func TestDivMul(t *testing.T) {
 }
 
 func TestThetaAndMag(t *testing.T) {
-	nTestsToRun := 10000
+	nTestsToRun := 1000
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		a := randomBigComplex()

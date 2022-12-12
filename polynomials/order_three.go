@@ -1,6 +1,8 @@
 package polynomials
 
 import (
+	"math/big"
+
 	"github.com/gbdubs/polynomials/bigcomplex"
 )
 
@@ -79,12 +81,23 @@ func ThirdOrderComplex128(a, b, c, d complex128) []complex128 {
 			FromComplex128UseWithCaution(d)))
 }
 
-func ThirdOrderReal(a, b, c, d float64) []float64 {
+func ThirdOrderReal(a, b, c, d *big.Float) []*big.Float {
 	return RealComponents(
 		FilterToReals(
 			ThirdOrder(
-				FromFloat64UseWithCaution(a),
-				FromFloat64UseWithCaution(b),
-				FromFloat64UseWithCaution(c),
-				FromFloat64UseWithCaution(d))))
+				&bigcomplex.BigComplex{Real: newFloat().Set(a), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(b), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(c), Imag: newFloat()},
+				&bigcomplex.BigComplex{Real: newFloat().Set(d), Imag: newFloat()})))
+}
+
+func ThirdOrderRealFloat64(a, b, c, d, e float64) []float64 {
+	return Float64s(
+		RealComponents(
+			FilterToReals(
+				ThirdOrder(
+					FromFloat64UseWithCaution(a),
+					FromFloat64UseWithCaution(b),
+					FromFloat64UseWithCaution(c),
+					FromFloat64UseWithCaution(d)))))
 }

@@ -7,16 +7,24 @@ This package allows you to solve degree four polynomials in constant time with c
 Shown below are instructions for how to use this for fourth-order polynomials, but the syntax is 
 analogous for first, second and third order polynomials.
 
-### Real Roots
+### Real `big.Float` Roots
 
 ```
-a := 1.24
-b := -32.0
-c := 55.22
-d := -15.0
-e := 22
+// Only improves on float64 if you have existing precision from elsewhere. 
+a := big.NewFloat(123.342) // b := ...; ... e
 
 realRoots := FourthOrderReal(a, b, c, d, e)
+// realRoots is an array of zero to four big.Float, each representing a unique root.
+// If empty there are no real roots, only complex ones.
+// Each member in realRoots will satisfy the equation ax^4 + bx^3 + cx^2 + dx^1 + e = 0
+```
+
+### Real Float64 Roots
+
+```
+a := 1.24; b := -32.0; c := 55.22; d := -15.0; e := 22.22
+
+realRoots := FourthOrderRealFloat64(a, b, c, d, e)
 // realRoots is an array of zero to four float64s, each representing a unique root.
 // If empty there are no real roots, only complex ones.
 // Each member in realRoots will satisfy the equation ax^4 + bx^3 + cx^2 + dx^1 + e = 0
@@ -25,11 +33,7 @@ realRoots := FourthOrderReal(a, b, c, d, e)
 ### Complex Roots
 
 ```
-a := complex(1.3, -3.202)
-b := complex(3.6, 1500)
-c := complex(-.4, -7.0000001)
-d := complex(0, -14.2)
-e := complex(-12, 0)
+a := complex(1.3, -3.202) // b := ...
 
 complexRoots := FourthOrderComplex128(a, b, c, d, e)
 // complexRoots is an array containing between 1 and 4 complex128s, each representing a unique root. 
