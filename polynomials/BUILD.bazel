@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "polynomials",
+    srcs = [
+        "big_complex_helpers.go",
+        "conv.go",
+        "order_four.go",
+        "order_one.go",
+        "order_three.go",
+        "order_two.go",
+        "polynomials_legacy.go",
+    ],
+    importpath = "github.com/gbdubs/polynomials/polynomials",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//bigcomplex",
+        "//precision",
+    ],
+)
+
+go_test(
+    name = "polynomials_test",
+    srcs = ["polynomials_test.go"],
+    embed = [":polynomials"],
+    deps = [
+        "//bigcomplex",
+        "@com_github_google_go_cmp//cmp",
+    ],
+)

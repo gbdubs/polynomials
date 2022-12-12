@@ -1,0 +1,1 @@
+This is a stripped down version of https://github.com/robpike/ivy , copied over on December 12th, 2022.

@@ -1,0 +1,107 @@
+package polynomials
+
+const tolerance = 0.000001
+
+/*
+func TestFirstOrder(t *testing.T) {
+	cs := []struct {
+		a, b     float64
+		expected []float64
+	}{
+		// No real solutions
+		{a: 0, b: 2, expected: []float64{}},
+		// One solution
+		{a: 2, b: -6, expected: []float64{3}},
+	}
+
+	for i, c := range cs {
+		t.Run(fmt.Sprintf("case %d: %+v", i, c), func(t *testing.T) {
+			expected := c.expected
+			actual := FirstOrderReal(c.a, c.b)
+			if diff := cmp.Diff(expected, actual, cmpopts.EquateApprox(0, tolerance)); diff != "" {
+				t.Errorf("unexpected diff:\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestSecondOrder(t *testing.T) {
+	cs := []struct {
+		a, b, c  float64
+		expected []float64
+	}{
+		// No real solutions
+		{a: 0, b: 0, c: 3, expected: []float64{}},
+		{a: 2, b: -4, c: 3, expected: []float64{}},
+		{a: -1, b: -4, c: -8, expected: []float64{}},
+		// One solution
+		{a: 2, b: -4, c: 2, expected: []float64{1}},
+		// Two solutions
+		{a: 5, b: -3, c: -10, expected: []float64{-1.145683229480096, 1.745683229480096}},
+	}
+
+	for i, c := range cs {
+		t.Run(fmt.Sprintf("case %d: %+v", i, c), func(t *testing.T) {
+			expected := c.expected
+			actual := SecondOrderReal(c.a, c.b, c.c)
+			if diff := cmp.Diff(expected, actual, cmpopts.EquateApprox(0, tolerance)); diff != "" {
+				t.Errorf("unexpected diff:\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestThirdOrder(t *testing.T) {
+	cs := []struct {
+		a, b, c, d float64
+		expected   []float64
+	}{
+		// One real root
+		{a: 2, b: -4, c: 2, d: -4, expected: []float64{2}},
+		// Two real roots
+		{a: 2, b: -4, c: 2, d: 0, expected: []float64{0, 1}},
+		// Three real roots
+		{a: 1, b: 4, c: -19, d: 14, expected: []float64{-7, 1, 2}},
+	}
+
+	for i, c := range cs {
+		t.Run(fmt.Sprintf("case %d: %+v", i, c), func(t *testing.T) {
+			expected := c.expected
+			actual := ThirdOrderReal(c.a, c.b, c.c, c.d)
+			if diff := cmp.Diff(expected, actual, cmpopts.EquateApprox(0, tolerance)); diff != "" {
+				t.Errorf("unexpected diff:\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestFourthOrder(t *testing.T) {
+	cs := []struct {
+		a, b, c, d, e float64
+		expected      []float64
+	}{
+		// 4 real roots
+		{a: 1, b: -1.25, c: -1.875, d: .625, e: .25, expected: []float64{-1, -.25, .5, 2}},
+		{a: 1, b: 1, c: 1, d: 1, e: -10, expected: []float64{-2, 1.4026279411860965}},
+		{a: -.01, b: .02, c: 1, d: 1, e: -10, expected: []float64{-7.262733236896056, -4.555624246559933, 2.7243554549243263, 11.094002028531662}},
+		// 3 real roots
+		{a: 1, b: -3.75, c: 2.25, d: 4, e: -3, expected: []float64{-1, .75, 2}},
+		// 2 real roots
+		{a: 1, b: -1.25, c: -1.875, d: .625, e: .75, expected: []float64{.7318665756420216, 1.9465989151499188}},
+		// 1 real root
+		{a: 1, b: -4, c: 6, d: -4, e: 1, expected: []float64{1}},
+		// 0 real roots
+		{a: 1, b: -1.25, c: -1.875, d: .625, e: 10, expected: []float64{}},
+	}
+
+	for i, c := range cs {
+		t.Run(fmt.Sprintf("case %d: %+v", i, c), func(t *testing.T) {
+			expected := c.expected
+			actual := FourthOrderReal(c.a, c.b, c.c, c.d, c.e)
+			if diff := cmp.Diff(expected, actual, cmpopts.EquateApprox(0, tolerance)); diff != "" {
+				t.Errorf("unexpected diff:\n%s", diff)
+			}
+		})
+	}
+}
+*/

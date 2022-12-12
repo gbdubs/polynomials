@@ -1,0 +1,7 @@
+{
+  "shadow": {
+    "exclude_files": {
+      ".*": "disable the shadowing check on all code, because it's fine"
+    }
+  }
+}

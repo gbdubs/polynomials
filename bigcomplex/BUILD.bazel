@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "bigcomplex",
+    srcs = [
+        "big_utils.go",
+        "bigcomplex.go",
+    ],
+    importpath = "github.com/gbdubs/polynomials/bigcomplex",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//bigtrig",
+        "//ivyshims",
+        "//precision",
+    ],
+)
+
+go_test(
+    name = "bigcomplex_test",
+    srcs = ["bigcomplex_test.go"],
+    embed = [":bigcomplex"],
+    deps = [
+        "//ivyshims",
+        "@com_github_google_go_cmp//cmp",
+    ],
+)
