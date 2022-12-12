@@ -67,8 +67,8 @@ and evaluating the magnitude of the error at the 1000 level. Note that it is inc
 get an error with an exponent in the 40-50 range, but not impossible. That's because of the compounding
 trailing errors from over 10,000 simple operations.
 
-![./img/1000-precision.png](A descritpion of the exponentially weighted error, which demonstrates that almost all of the results have no error, but a long tail have error on the order of -950 on the exponent
-for a precision of 1000)
+![A descritpion of the exponentially weighted error, which demonstrates that almost all of the results have no error, but a long tail have error on the order of -950 on the exponent
+for a precision of 1000](./img/1000-precision.png)
 
 ## Runtime
 
