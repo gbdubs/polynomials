@@ -23,6 +23,12 @@ func Pow(x *big.Float, e *big.Float) *big.Float {
 	return bigFloat(power(shimContext(), shimValue(x), shimValue(e)))
 }
 
+func ComplexSqrt(r, i *big.Float) (*big.Float, *big.Float) {
+	v := Complex{real: shimValue(r), imag: shimValue(i)}
+	res := complexSqrt(shimContext(), v)
+	return bigFloat(res.real), bigFloat(res.imag)
+}
+
 func shimContext() Context {
 	c := &Config{}
 	c.init()
@@ -38,5 +44,8 @@ func bigFloat(v Value) *big.Float {
 	if u, ok := v.(BigFloat); ok {
 		return u.Float
 	}
-	panic(fmt.Errorf("expected to return big float but did not"))
+	if u, ok := v.(Int); ok {
+		return newFloat(shimContext()).SetInt64(int64(u))
+	}
+	panic(fmt.Errorf("expected to return BigFloat but returned %T: %+v", v, v))
 }

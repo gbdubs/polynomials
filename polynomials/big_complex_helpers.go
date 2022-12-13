@@ -26,7 +26,7 @@ func cube(a *bigcomplex.BigComplex) *bigcomplex.BigComplex {
 	return bigcomplex.Cube(a)
 }
 func sqrt(a *bigcomplex.BigComplex) *bigcomplex.BigComplex {
-	return a.Sqrt()[0]
+	return a.Sqrt()
 }
 func cbrt(a *bigcomplex.BigComplex) *bigcomplex.BigComplex {
 	return a.Cbrt()

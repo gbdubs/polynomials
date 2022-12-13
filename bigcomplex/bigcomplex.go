@@ -88,6 +88,7 @@ func Cube(a *BigComplex) *BigComplex {
 	return Mul(a, a, a)
 }
 
+/* On it's face this is likely wrong - it occasionally produces 4 roots!!!
 // Uses a simplified version of this code
 // https://www.geeksforgeeks.org/square-root-of-two-complex-numbers/
 func (bc *BigComplex) Sqrt() []*BigComplex {
@@ -119,6 +120,14 @@ func (bc *BigComplex) Sqrt() []*BigComplex {
 		result = append(result, &BigComplex{Real: x4, Imag: y4})
 	}
 	return result
+}
+*/
+func (bc *BigComplex) Sqrt() *BigComplex {
+	r, i := ivyshims.ComplexSqrt(bc.Real, bc.Imag)
+	return &BigComplex{
+		Real: r,
+		Imag: i,
+	}
 }
 
 func (bc *BigComplex) Cbrt() *BigComplex {

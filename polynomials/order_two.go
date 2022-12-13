@@ -16,11 +16,10 @@ func SecondOrder(a, b, c *bigcomplex.BigComplex) []*bigcomplex.BigComplex {
 	if disc.IsZero() {
 		return []*bigcomplex.BigComplex{div(mul(negOne, b), mul(two, a))}
 	}
-	roots := disc.Sqrt()
-	result := []*bigcomplex.BigComplex{}
-	for _, root := range roots {
-		result = append(result, div(sub(mul(negOne, b), root), mul(two, a)))
-		result = append(result, div(add(mul(negOne, b), root), mul(two, a)))
+	root := disc.Sqrt()
+	result := []*bigcomplex.BigComplex{
+		div(sub(mul(negOne, b), root), mul(two, a)),
+		div(add(mul(negOne, b), root), mul(two, a)),
 	}
 	return bigcomplex.Unique(result)
 }

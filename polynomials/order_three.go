@@ -34,7 +34,7 @@ func ThirdOrder(a, b, c, d *bigcomplex.BigComplex) []*bigcomplex.BigComplex {
 		}
 		delta0OverBigC = div(delta0, bigC)
 	}
-	zeta := div(add(fromInt(-1), fromInt(-3).Sqrt()[0]), fromInt(2))
+	zeta := div(add(fromInt(-1), fromInt(-3).Sqrt()), fromInt(2))
 	zeta1 := zeta
 	zeta2 := mul(zeta, zeta)
 	x0 := div(add(b, bigC, delta0OverBigC), mul(fromInt(-3), a))
@@ -58,7 +58,7 @@ func ThirdOrderEquivalentButSlower(a, b, c, d *bigcomplex.BigComplex) []*bigcomp
 	p := div(mul(negOne, b), mul(three, a))
 	q := add(mul(mul(p, p), p), div(sub(mul(b, c), mul(three, mul(a, d))), mul(six, sq(a))))
 	r := div(c, mul(three, a))
-	s := add(sq(q), cube(sub(r, sq(p)))).Sqrt()[0]
+	s := add(sq(q), cube(sub(r, sq(p)))).Sqrt()
 	x0 := add(add(q, s).Pow(newRat(1, 3)), sub(q, s).Pow(newRat(1, 3)), p)
 
 	// Then uses polynomial long division (with an assumed remainder of zero)

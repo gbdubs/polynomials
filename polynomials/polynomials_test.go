@@ -139,7 +139,6 @@ func assertBigEq(t *testing.T, context string, got, want *big.Float) {
 		bb := newFloat().Set(b)
 		c := aa.Sub(aa, bb)
 		c = c.Abs(c)
-		fmt.Printf("Diff Magnitude = %+v\n", c.MantExp(nil))
 		return c.Cmp(getCmpTolerance()) < 0
 	})
 	if diff := cmp.Diff(want, got, comparer); diff != "" {

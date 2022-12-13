@@ -38,14 +38,8 @@ func TestSqrt(t *testing.T) {
 	rand.Seed(0)
 	for i := 0; i < nTestsToRun; i++ {
 		n := randomBigComplex()
-		sqrts := n.Sqrt()
-		if len(sqrts) < 1 || len(sqrts) > 2 {
-			t.Fatalf("expected [1, 4] solutions, got [%d]: %+v", len(sqrts), sqrts)
-		}
-		for _, sqrt := range sqrts {
-			assertBigComplexEq(t, Sq(sqrt), n)
-		}
-		assertUnique(t, sqrts)
+		sqrt := n.Sqrt()
+		assertBigComplexEq(t, Sq(sqrt), n)
 	}
 }
 
@@ -97,18 +91,5 @@ func assertBigEq(t *testing.T, context string, got, want *big.Float) {
 	})
 	if diff := cmp.Diff(want, got, comparer); diff != "" {
 		t.Fatalf("%s: got %+v, want %+v, diff %s", context, got, want, diff)
-	}
-}
-
-func assertUnique(t *testing.T, bcs []*BigComplex) {
-	result := make(map[string]bool)
-	for _, bc := range bcs {
-		real := newFloat().Set(bc.Real).String()
-		imag := newFloat().Set(bc.Imag).String()
-		s := fmt.Sprintf("R=%s I=%s", real, imag)
-		if result[s] {
-			t.Errorf("found duplicate: %s", s)
-		}
-		result[s] = true
 	}
 }
