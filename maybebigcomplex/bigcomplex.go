@@ -1,34 +1,34 @@
-package bigcomplex
+package maybebigcomplex
 
 import (
 	"math/big"
 
-	"github.com/gbdubs/polynomials/bigtrig"
+	"github.com/gbdubs/maybebig/maybebig"
 	"github.com/gbdubs/polynomials/ivyshims"
 )
 
 type BigComplex struct {
-	Real *big.Float
-	Imag *big.Float
+	Real *maybebig.Float
+	Imag *maybebig.Float
 }
 
-func (bc *BigComplex) Magnitude() *big.Float {
+func (bc *BigComplex) Magnitude() *maybebig.Float {
 	return sqrtSimple(add(sq(bc.Real), sq(bc.Imag)))
 }
 
-func (bc *BigComplex) Theta() *big.Float {
+func (bc *BigComplex) Theta() *maybebig.Float {
 	if isZero(bc.Real) {
-		if negative(bc.Imag) {
-			return div(bigtrig.Pi(), fromInt(-2))
+		if ltz(bc.Imag) {
+			return div(maybebig.Pi(), fromInt(-2))
 		}
-		return div(bigtrig.Pi(), fromInt(2))
+		return div(maybebig.Pi(), fromInt(2))
 	}
-	atan := ivyshims.Atan(div(bc.Imag, bc.Real))
-	if negative(bc.Real) {
-		if positive(bc.Imag) {
-			atan = add(atan, bigtrig.Pi())
+	atan := fromBig(ivyshims.Atan(div(bc.Imag, bc.Real).GetBig()))
+	if ltz(bc.Real) {
+		if gtz(bc.Imag) {
+			atan = add(atan, maybebig.Pi())
 		} else {
-			atan = sub(atan, bigtrig.Pi())
+			atan = sub(atan, maybebig.Pi())
 		}
 	}
 	return atan
@@ -126,40 +126,40 @@ func Cube(a *BigComplex) *BigComplex {
 	}
 */
 func (bc *BigComplex) Sqrt() *BigComplex {
-	r, i := ivyshims.ComplexSqrt(bc.Real, bc.Imag)
+	r, i := ivyshims.ComplexSqrt(bc.Real.GetBig(), bc.Imag.GetBig())
 	return &BigComplex{
-		Real: r,
-		Imag: i,
+		Real: fromBig(r),
+		Imag: fromBig(i),
 	}
 }
 
 func (bc *BigComplex) Cbrt() *BigComplex {
-	return bc.Pow(newFloat().SetRat(big.NewRat(1, 3)))
+	return bc.Pow(fromBig(newFloat().GetBig().SetRat(big.NewRat(1, 3))))
 }
 
-func (bc *BigComplex) Pow(e *big.Float) *BigComplex {
+func (bc *BigComplex) Pow(e *maybebig.Float) *BigComplex {
 	r := bc.Magnitude()
 	theta := bc.Theta()
 
 	return Mul(
 		&BigComplex{
-			Real: ivyshims.Pow(r, e),
+			Real: fromBig(ivyshims.Pow(r.GetBig(), e.GetBig())),
 			Imag: newFloat(),
 		},
 		&BigComplex{
-			Real: ivyshims.Cos(mul(e, theta)),
-			Imag: ivyshims.Sin(mul(e, theta)),
+			Real: fromBig(ivyshims.Cos(mul(e, theta).GetBig())),
+			Imag: fromBig(ivyshims.Sin(mul(e, theta).GetBig())),
 		},
 	)
 }
 
 func (bc *BigComplex) Equals(other *BigComplex) bool {
-	return bc.Real.Cmp(other.Real) == 0 && bc.Imag.Cmp(other.Imag) == 0
+	return eq(bc.Real, other.Real) && eq(bc.Imag, other.Imag)
 }
 
 func (bc *BigComplex) IsZero() bool {
 	other := newFloat()
-	return other.Cmp(bc.Imag) == 0 && other.Cmp(bc.Real) == 0
+	return eq(other, bc.Imag) && eq(other, bc.Real)
 }
 
 func Unique(in []*BigComplex) []*BigComplex {
@@ -179,7 +179,7 @@ func Unique(in []*BigComplex) []*BigComplex {
 }
 
 func (bc *BigComplex) Complex128() complex128 {
-	r, _ := bc.Real.Float64()
-	i, _ := bc.Imag.Float64()
+	r := bc.Real.Float64()
+	i := bc.Imag.Float64()
 	return complex(r, i)
 }

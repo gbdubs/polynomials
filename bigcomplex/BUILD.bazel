@@ -21,6 +21,7 @@ go_test(
     embed = [":bigcomplex"],
     deps = [
         "//ivyshims",
+        "//precision",
         "@com_github_google_go_cmp//cmp",
     ],
 )

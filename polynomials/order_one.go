@@ -3,7 +3,9 @@ package polynomials
 import (
 	"math/big"
 
+	"github.com/gbdubs/maybebig/maybebig"
 	"github.com/gbdubs/polynomials/bigcomplex"
+	"github.com/gbdubs/polynomials/maybebigcomplex"
 )
 
 func FirstOrder(a, b *bigcomplex.BigComplex) []*bigcomplex.BigComplex {
@@ -13,6 +15,16 @@ func FirstOrder(a, b *bigcomplex.BigComplex) []*bigcomplex.BigComplex {
 	}
 	return []*bigcomplex.BigComplex{
 		div(mul(bigcomplex.FromInt(-1), b), a),
+	}
+}
+
+func FirstOrderMB(a, b *maybebigcomplex.BigComplex) []*maybebigcomplex.BigComplex {
+	if a.IsZero() {
+		// No solution possible, either allways satisfies or nothing satisfies
+		return nil
+	}
+	return []*maybebigcomplex.BigComplex{
+		divMB(mulMB(maybebigcomplex.FromInt(-1), b), a),
 	}
 }
 
@@ -38,4 +50,12 @@ func FirstOrderRealFloat64(a, b, c, d, e float64) []float64 {
 				FirstOrder(
 					FromFloat64UseWithCaution(a),
 					FromFloat64UseWithCaution(b)))))
+}
+
+func FirstOrderRealMB(a, b, c, d, e *maybebig.Float) []*maybebig.Float {
+	return RealComponentsMB(
+		FilterToRealsMB(
+			FirstOrderMB(
+				&maybebigcomplex.BigComplex{Real: a, Imag: maybebig.NewFloatZ()},
+				&maybebigcomplex.BigComplex{Real: b, Imag: maybebig.NewFloatZ()})))
 }

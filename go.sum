@@ -1,2 +1,4 @@
+github.com/gbdubs/maybebig v1.0.2 h1:9MQBoGAWN0Qvhb0O+16lTXZRm/FzjYTDvT+QRccA0DE=
+github.com/gbdubs/maybebig v1.0.2/go.mod h1:M1MclT1ASNkUG6RBawhGdkHuyakDQZSbmmri85xWxyM=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=

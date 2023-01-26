@@ -4,6 +4,7 @@ import (
 	"math/big"
 
 	"github.com/gbdubs/polynomials/bigcomplex"
+	"github.com/gbdubs/polynomials/maybebigcomplex"
 	"github.com/gbdubs/polynomials/precision"
 )
 
@@ -38,5 +39,39 @@ func newFloat() *big.Float {
 	return big.NewFloat(0).SetPrec(precision.Get())
 }
 func newRat(a, b int) *big.Float {
+	return newFloat().SetRat(big.NewRat(int64(a), int64(b)))
+}
+
+func addMB(bcs ...*maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Add(bcs...)
+}
+func subMB(a, b *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Sub(a, b)
+}
+func mulMB(bcs ...*maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Mul(bcs...)
+}
+func divMB(a, b *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Div(a, b)
+}
+func sqMB(a *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Sq(a)
+}
+func cubeMB(a *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.Cube(a)
+}
+func sqrtMB(a *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return a.Sqrt()
+}
+func cbrtMB(a *maybebigcomplex.BigComplex) *maybebigcomplex.BigComplex {
+	return a.Cbrt()
+}
+func fromIntMB(i int) *maybebigcomplex.BigComplex {
+	return maybebigcomplex.FromInt(i)
+}
+func newFloatmB() *big.Float {
+	return big.NewFloat(0).SetPrec(precision.Get())
+}
+func newRatMB(a, b int) *big.Float {
 	return newFloat().SetRat(big.NewRat(int64(a), int64(b)))
 }
