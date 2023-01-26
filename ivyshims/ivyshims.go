@@ -3,6 +3,7 @@ package ivyshims
 import (
 	"fmt"
 	"math/big"
+	"sync"
 
 	"github.com/gbdubs/polynomials/precision"
 )
@@ -29,11 +30,20 @@ func ComplexSqrt(r, i *big.Float) (*big.Float, *big.Float) {
 	return bigFloat(res.real), bigFloat(res.imag)
 }
 
+var ctx Context
+var ctxLock sync.RWMutex
+
 func shimContext() Context {
+	ctxLock.Lock()
+	defer ctxLock.Unlock()
+	if ctx != nil {
+		return ctx
+	}
 	c := &Config{}
 	c.init()
 	c.SetFloatPrec(precision.Get())
-	return NewContext(c)
+	ctx = NewContext(c)
+	return ctx
 }
 
 func shimValue(b *big.Float) Value {
