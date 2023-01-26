@@ -129,8 +129,8 @@ func (bc *BigComplex) Sqrt() *BigComplex {
 	// Pursues this approach over the ivyshims version, which requires conversion.
 	// r, i := ivyshims.ComplexSqrt(bc.Real.GetBig(), bc.Imag.GetBig())
 	mag := sqrt(add(sq(bc.Real), sq(bc.Imag)))
-	real := sqrt(div(add(mag, bc.Real), fromInt(2)))
-	imag := sqrt(div(sub(mag, bc.Real), fromInt(2)))
+	real := sqrt(min(div(add(mag, bc.Real), fromInt(2)), fromInt(0)))
+	imag := sqrt(min(div(sub(mag, bc.Real), fromInt(2)), fromInt(0)))
 	if ltz(bc.Imag) {
 		imag = mul(imag, fromInt(-1))
 	}
