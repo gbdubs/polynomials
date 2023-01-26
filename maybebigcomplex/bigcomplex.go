@@ -126,10 +126,17 @@ func Cube(a *BigComplex) *BigComplex {
 	}
 */
 func (bc *BigComplex) Sqrt() *BigComplex {
-	r, i := ivyshims.ComplexSqrt(bc.Real.GetBig(), bc.Imag.GetBig())
+	// Pursues this approach over the ivyshims version, which requires conversion.
+	// r, i := ivyshims.ComplexSqrt(bc.Real.GetBig(), bc.Imag.GetBig())
+	mag := sqrt(add(sq(bc.Real), sq(bc.Imag)))
+	real := sqrt(div(add(mag, bc.Real), fromInt(2)))
+	imag := sqrt(div(sub(mag, bc.Real), fromInt(2)))
+	if ltz(bc.Imag) {
+		imag = mul(imag, fromInt(-1))
+	}
 	return &BigComplex{
-		Real: fromBig(r),
-		Imag: fromBig(i),
+		Real: real,
+		Imag: imag,
 	}
 }
 
